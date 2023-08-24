@@ -28,4 +28,18 @@ PurokCounter.updateCounter = (purokNumber, callback) => {
   );
 };
 
+PurokCounter.getAllCounts = (callback) => {
+  dbConn.query(
+    "SELECT * FROM purok_counter WHERE id = 1",
+    (error, result) => {
+      if (error) {
+        console.error("Error fetching purok counts: ", error);
+        return callback(error, null);
+      }
+      console.log("Purok counts fetched successfully");
+      return callback(null, result[0]); // Return the first row as an object
+    }
+  );
+};
+
 module.exports = PurokCounter;

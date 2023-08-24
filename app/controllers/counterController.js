@@ -23,3 +23,20 @@ exports.count = function (req, res) {
     });
   });
 };
+
+exports.getCount = function (req, res) {
+  PurokCounterModel.getAllCounts((error, result) => {
+    if (error) {
+      console.error("Error getting purok counts: ", error);
+      return res.status(500).json({
+        error: "Internal Server Error",
+        message: "Error getting purok counts",
+      });
+    }
+    console.log("Purok counts fetched successfully");
+    return res.status(200).json({
+      message: "Purok counts fetched successfully",
+      data: result,
+    });
+  });
+};
